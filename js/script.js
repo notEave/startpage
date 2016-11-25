@@ -162,17 +162,21 @@ let specialChars = [
     ':',
     '-',
     '_',
+    '<',
+    '>',
+    '|',
 ];
 
 function Start() {
     document.addEventListener( 'keydown', KbEvent, false );
-    ByClass( 'canv', 0 ).width = Dimension()[ 0 ];
-    ByClass( 'canv', 0 ).height = Dimension()[ 1 ];
-    ByClass( 'canv', 0 ).getContext( '2d' ).font = '50px sans-serif';
-    ByClass( 'canv', 0 ).getContext( '2d' ).fillStyle = '#DCDCCC';
+    ScaleCanvas();
 }
 
 function Resize() {
+    ScaleCanvas();
+}
+
+function ScaleCanvas() {
     ByClass( 'canv', 0 ).width = Dimension()[ 0 ];
     ByClass( 'canv', 0 ).height = Dimension()[ 1 ];
     ByClass( 'canv', 0 ).getContext( '2d' ).font = '50px sans-serif';
