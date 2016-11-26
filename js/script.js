@@ -12,9 +12,11 @@ class Letter {
         this.b = RandRange(140, 255);
         this.fillStyle = 'rgba(' + this.r + ',' + this.g + ',' +
         this.b + ',' + 0.7 + ')';
+        this.lifeTime = 0;
     }
-    
+
     Draw() {
+        this.lifeTime++;
         this.velocityY += -20;
         this.positionY = this.positionY - this.velocityY / 100;
         this.positionX = this.positionX - this.velocityX / 100;
@@ -63,12 +65,13 @@ function KbEvent( event ) {
             window.location = 'https://duckduckgo.com/?q=' + $( 'search' ).value;
         }
         if (allowedChars.includes(event.key.toLowerCase())){
-            characterArr.push( new Letter( event.key, Dimension()[0] / 2, Dimension()[ 1 ] + 50 ) );
+            for( let i = 0; i < 5; i++){
+                characterArr.push( new Letter( event.key, Dimension()[0] / 2, Dimension()[ 1 ] + 50 ) );
+            }
         } else if(specialChars.includes(event.key)){
-            characterArr.push( new Letter( event.key, Dimension()[0] / 2, Dimension()[ 1 ] + 50 ) );
-        }
-        if ( characterArr.length > 100 ){
-        characterArr.shift();
+            for ( let i = 0; i < 5; i++ ){
+                characterArr.push( new Letter( event.key, Dimension()[0] / 2, Dimension()[ 1 ] + 50 ) );
+            }
         }
     }
 }
@@ -175,6 +178,10 @@ function Frame() {
     for ( let x = 0; x < characterArr.length; x++ ) {
         ByClass( 'canv', 0 ).getContext( '2d' ).fillStyle = characterArr[x].fillStyle;
         characterArr[ x ].Draw();
+        if ( characterArr[x].positionY > Dimension()[1] + 50 ) {
+            characterArr.splice(x, 1);
+        }
+
     }
     // ByClass('canv', 0).getContext('2d').fillText(':^)', 10, i - 50);
     // ByClass('canv', 0).getContext('2d').fillText(':v)', 10, i);
