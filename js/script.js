@@ -53,7 +53,6 @@ function Blur() {
 
 
 function KbEvent( event ) {
-    console.log(event.key);
     if(event.key == 'Tab'){
         event.preventDefault();
         $('search').focus();
@@ -63,25 +62,12 @@ function KbEvent( event ) {
             window.location = 'https://duckduckgo.com/?q=' + $( 'search' ).value;
         }
         if (allowedChars.includes(event.key.toLowerCase())){
-            characterArr.push( new Letter( event.key, keyX, Dimension()[ 1 ] + 50 ) );
-            if (keyX < Dimension()[0] - 30) {
-                keyX += 30;
-            } else {
-                keyX = 0;
-            }
-            if ( characterArr.length > 100 ){
-                characterArr.shift();
-            }
+            characterArr.push( new Letter( event.key, Dimension()[0] / 2, Dimension()[ 1 ] + 50 ) );
         } else if(specialChars.includes(event.key)){
-            characterArr.push( new Letter( event.key, keyX, Dimension()[ 1 ] + 50 ) );
-            if (keyX < Dimension()[0] - 30) {
-                keyX += 30;
-            } else {
-                keyX = 0;
-            }
-            if ( characterArr.length > 100 ){
-                characterArr.shift();
-            }
+            characterArr.push( new Letter( event.key, Dimension()[0] / 2, Dimension()[ 1 ] + 50 ) );
+        }
+        if ( characterArr.length > 100 ){
+        characterArr.shift();
         }
     }
 }
@@ -179,7 +165,7 @@ function Resize() {
 function ScaleCanvas() {
     ByClass( 'canv', 0 ).width = Dimension()[ 0 ];
     ByClass( 'canv', 0 ).height = Dimension()[ 1 ];
-    ByClass( 'canv', 0 ).getContext( '2d' ).font = '50px sans-serif';
+    ByClass( 'canv', 0 ).getContext( '2d' ).font = '30px sans-serif';
     ByClass( 'canv', 0 ).getContext( '2d' ).fillStyle = '#DCDCCC';
 }
 
@@ -192,9 +178,8 @@ function Frame() {
     }
     // ByClass('canv', 0).getContext('2d').fillText(':^)', 10, i - 50);
     // ByClass('canv', 0).getContext('2d').fillText(':v)', 10, i);
+    console.log(i);
     requestAnimationFrame( Frame );
 }
 
-let i = 0;
-let keyX = 0;
 requestAnimationFrame( Frame );
