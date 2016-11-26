@@ -13,6 +13,7 @@ class Letter {
         this.fillStyle = 'rgba(' + this.r + ',' + this.g + ',' +
         this.b + ',' + 0.7 + ')';
     }
+    
     Draw() {
         this.velocityY += -20;
         this.positionY = this.positionY - this.velocityY / 100;
