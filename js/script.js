@@ -170,7 +170,6 @@ function ScaleCanvas() {
 }
 
 function Frame() {
-    i++;
     ByClass( 'canv', 0 ).getContext( '2d' ).clearRect( 0, 0, Dimension()[ 0 ], Dimension()[ 1 ] );
     for ( let x = 0; x < characterArr.length; x++ ) {
         ByClass( 'canv', 0 ).getContext( '2d' ).fillStyle = characterArr[x].fillStyle;
@@ -178,7 +177,6 @@ function Frame() {
     }
     // ByClass('canv', 0).getContext('2d').fillText(':^)', 10, i - 50);
     // ByClass('canv', 0).getContext('2d').fillText(':v)', 10, i);
-    console.log(i);
     requestAnimationFrame( Frame );
 }
 
